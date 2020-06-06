@@ -43,7 +43,10 @@ class CPU:
 
         if op == "ADD":
             self.reg[reg_a] += self.reg[reg_b]
-        #elif op == "SUB": etc
+
+        elif op == "MUL":
+            self.reg[reg_a] *= self.reg[reg_b]
+            
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -75,13 +78,15 @@ class CPU:
         print()
 
     def run(self):
+
         """Run the CPU."""
+
         IR = []
         HLT = 0b00000001
         LDI = 0b10000010
         PRN = 0b01000111
-        operand_a = self.ram_read(self.pc+1) 
-        operand_b = self.ram_read(self.pc+2)
+        MUL = 0b10100010
+        
     
         running = True 
 
@@ -90,22 +95,29 @@ class CPU:
             IR = self.ram[self.pc] # instruction register
             num_args = IR >> 6
 
-            if IR == LDI: # LDI
+            operand_a = self.ram_read(self.pc+1) 
+            operand_b = self.ram_read(self.pc+2)
+
+            if IR == LDI: 
+
                 # set register at index to value
                 self.reg[operand_a] = operand_b 
-                # self.pc += 3 # increment
-
+         
             elif IR == PRN: # print
+
                 # get the address whose value we are printing out
                 print(self.reg[operand_a])
 
-                # self.pc += 2
+            elif IR == MUL:
+
+                self.alu("MUL", operand_a, operand_b)
                 
-            elif IR == HLT: # halt
+            elif IR == HLT:
 
                 running = False
             
             else:
+
                 print('Unknown command')
                 running = False
             
@@ -117,7 +129,7 @@ class CPU:
 if __name__ == '__main__':
     cpu = CPU()
     cpu.load()
-    print(cpu.ram)
+
     # cpu.trace()
-    # cpu.run()
-    # import sys
+    cpu.run()
+    # # import sys
