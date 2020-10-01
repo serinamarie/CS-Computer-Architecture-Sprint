@@ -4,10 +4,13 @@ import sys
 
 class CPU:
     """Main CPU class."""
+   
 
     def __init__(self):
         """Construct a new CPU."""
-        pass
+        self.ram = [0] * 255
+        self.reg = [0] * 8
+        self.pc = 0
 
     def load(self):
         """Load a program into memory."""
@@ -40,6 +43,13 @@ class CPU:
         else:
             raise Exception("Unsupported ALU operation")
 
+    def ram_read(self, address):
+        return self.ram[address]
+    
+    def ram_write(self, address, data):
+        self.ram[address] = data
+        
+
     def trace(self):
         """
         Handy function to print out the CPU state. You might want to call this
@@ -62,4 +72,54 @@ class CPU:
 
     def run(self):
         """Run the CPU."""
-        pass
+        IR = []
+        HLT = 0b00000001
+        LDI = 0b10000010
+        PRN = 0b01000111
+        operand_a = self.ram_read(self.pc+1) 
+        operand_b = self.ram_read(self.pc+2)
+    
+        # ram = [
+        #     0b10000010, # LDI (LoaD Immediate) R0,8
+        #     0b00000000,
+        #     0b00001000,
+        #     0b01000111, # PRN R0
+        #     0b00000000,
+        #     0b00000001] # HLT
+
+        running = True 
+
+        while running:
+
+            IR = self.ram[self.pc] # instruction register
+
+            if IR == LDI: # LDI
+                # set register at index to value
+                self.reg[operand_a] = operand_b 
+                self.pc += 3 # increment
+
+            elif IR == PRN: # print
+                # get the address whose value we are printing out
+                print(self.reg[operand_a])
+
+                self.pc += 2
+                
+            elif IR == HLT: # halt
+
+                running = False
+            
+            else:
+                print('Unknown command')
+                running = False
+        
+
+        
+
+if __name__ == '__main__':
+    cpu = CPU()
+    cpu.load()
+    # cpu.trace()
+    cpu.run()
+    import sys
+    print('first arg:', sys.argv[0])
+    print(len(sys.argv))

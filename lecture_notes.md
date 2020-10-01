@@ -93,3 +93,5 @@ What is 0b11100111 in hex?
 What is 27 in binary?
 
 Write a program that outputs a value in binary. Hint: >> and &
+
+multibit numbers
