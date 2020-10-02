@@ -14,6 +14,7 @@ LS8-cheatsheet.md
 LS8-spec.md: Registers, Internal Registers, Flags, Stack, Interrupts, 
 README.md - objectives for modules 1-4
 
+```
 ADD regA regB: add reg A and reg B, store in reg A
 AND regA regB: bitwise-AND values in reg A and B, store in reg A
 CALL register: call register
@@ -51,3 +52,4 @@ SHR (this is an instruction handled by the ALU): shift the value in regA right b
 ST regA regB: store value in regB in the address stored in regA
 SUB regA regB (this is an instruction handled by the ALU): subtract the value in the second reg from the first, storing result in regA
 XOR regA regB: perform a bitwise-XOR between the values in regA and regB, storing result in regA
+```

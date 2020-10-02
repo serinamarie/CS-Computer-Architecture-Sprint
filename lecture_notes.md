@@ -95,3 +95,13 @@ What is 27 in binary?
 Write a program that outputs a value in binary. Hint: >> and &
 
 multibit numbers
+
+Lecture 2
+Different bitwise operations
+- isolate the bits
+    - number of operands: 0b10010101 >> 6 == 2 
+    - if this is an ALU operation:
+        - ADD is an ALU op. 10100000 >> 5 = 101
+            - & it with 001 for a positive ALU = 001
+            - concise: ((0b10100000 >> 5) & 001)
+
