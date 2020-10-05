@@ -105,3 +105,18 @@ Different bitwise operations
             - & it with 001 for a positive ALU = 001
             - concise: ((0b10100000 >> 5) & 001)
 
+What is the stack? 
+- stack data stored in ram
+- stack pointer keeps track of address on top of stack
+- typically stack grows down from higher memory address 
+    - decrement address in stack and store 
+    - pop from bottom of the stack??
+- only so many registers, so we can push it on the stack and use it as temporary storage of variables
+- storage of registers and cpu state during an interrupt
+- how can you detect if stack is empty?
+what happens if you pop from an empty stack?
+what happens if you push too many items on the stack?
+what info must be saved on the stack when the cpu is servicing the interrupt? why?
+
+- pc needs to move to interrupt handler
+    - interrupt vector table 

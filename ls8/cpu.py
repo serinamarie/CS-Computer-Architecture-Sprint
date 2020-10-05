@@ -86,9 +86,19 @@ class CPU:
         LDI = 0b10000010
         PRN = 0b01000111
         MUL = 0b10100010
+        ADD = 0b10100110
+        # PUSH = 0b0100
+
+        # 0b10100110 >> 5
+        # 101 & 001 to get 1 to check if ALU op
+        is_alu_op = (IR >> 5) & 0b001
         
     
         running = True 
+
+         # storage, push, pop, pointer
+        #  self.reg[7] = 0xF4
+        
 
         while running:
 
@@ -97,6 +107,8 @@ class CPU:
 
             operand_a = self.ram_read(self.pc+1) 
             operand_b = self.ram_read(self.pc+2)
+
+            is_alu_op = (IR >> 5) & 0b001 == 1
 
             if IR == LDI: 
 
@@ -111,6 +123,10 @@ class CPU:
             elif IR == MUL:
 
                 self.alu("MUL", operand_a, operand_b)
+
+            # elif is_alu_op:
+
+                # self.alu("MUL", )
                 
             elif IR == HLT:
 
