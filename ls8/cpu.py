@@ -23,9 +23,6 @@ OR = 0b10101010
 AND = 0b10101000
 XOR = 0b10101011
 
-# implement ALU functionality
-# optimize the run function to O(1)
-
 class CPU:
     """Main CPU class."""
 
@@ -206,7 +203,7 @@ class CPU:
 
                 # increment pc here
                 self.pc += 1 + num_args
-                
+
 
     def hlt(self, operand_a, operand_b):
 
