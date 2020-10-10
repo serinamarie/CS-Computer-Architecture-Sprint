@@ -31,7 +31,7 @@ class CPU:
         self.ram = [0] * 256
         self.reg = [0] * 8
         self.reg[7] = 0xF4
-        self.reg[6] = 0# flags reg
+        self.reg[6] = 0 # flags reg
         self.pc = 0
 
         self.branchtable = {
